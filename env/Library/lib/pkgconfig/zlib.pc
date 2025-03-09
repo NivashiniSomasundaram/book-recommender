@@ -1,0 +1,13 @@
+prefix=C:/Book_Recommender_system/env/Library
+exec_prefix=C:/Book_Recommender_system/env/Library
+libdir=C:/Book_Recommender_system/env/Library/lib
+sharedlibdir=C:/Book_Recommender_system/env/Library/lib
+includedir=C:/Book_Recommender_system/env/Library/include
+
+Name: zlib
+Description: zlib compression library
+Version: 1.2.13
+
+Requires:
+Libs: -L${libdir} -L${sharedlibdir} -lz
+Cflags: -I${includedir}
