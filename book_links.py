@@ -1,11 +1,14 @@
 import requests
+import os
+
+api_key = os.getenv("GOOGLE_BOOKS_API_KEY") 
 
 def get_book_link(book_title):
     """
     Fetches a book's link from Google Books API.
     Falls back to a Google Search link if not found.
     """
-    api_key = "AIzaSyCO9qyVal9f67qlW4JDTwA1sxRiQdEtK-8"  # Your API key
+    api_key = os.getenv("GOOGLE_BOOKS_API_KEY")
     url = f"https://www.googleapis.com/books/v1/volumes?q={book_title}&key={api_key}"
     
     try:
