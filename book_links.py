@@ -1,12 +1,17 @@
 import requests
 import os
 
+# Check if API Key is set in Render
+API_KEY = os.getenv("GOOGLE_BOOKS_API_KEY")
+
+if API_KEY:
+    print("✅ DEBUG: API Key is set in Render (value hidden for security).")
+else:
+    print("❌ ERROR: API Key is NOT set in Render. Check environment settings.")
+
 def get_book_link(book_title):
     """Fetches a book's link from Google Books API."""
     
-    API_KEY = os.getenv("GOOGLE_BOOKS_API_KEY")  # Get API key from environment variables
-    print("DEBUG: API Key Retrieved Successfully")  # Safe debug message
-
     if not API_KEY:
         print("ERROR: API Key is missing! Make sure it's set in your environment variables.")
         return "API Key Missing!"
