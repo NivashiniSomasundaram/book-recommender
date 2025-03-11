@@ -4,23 +4,35 @@ import os
 def get_book_link(book_title):
     """Fetches a book's link from Google Books API."""
     
-    API_KEY = os.getenv("GOOGLE_BOOKS_API_KEY")  # Get API key from Render environment
-    print(f"Using API Key: {API_KEY}")  # DEBUG: Check if API key is retrieved
+    API_KEY = os.getenv("GOOGLE_BOOKS_API_KEY")  # Get API key from environment variables
+    print("DEBUG: API Key Retrieved Successfully")  # Safe debug message
 
     if not API_KEY:
-        print("ERROR: API Key is missing!")
+        print("ERROR: API Key is missing! Make sure it's set in your environment variables.")
         return "API Key Missing!"
 
     url = f"https://www.googleapis.com/books/v1/volumes?q={book_title}&key={API_KEY}"
-    
+
     try:
-        response = requests.get(url).json()
-        if "items" in response:
-            for item in response["items"]:
+        response = requests.get(url)
+        response.raise_for_status()  # Raise an error for HTTP issues
+
+        data = response.json()
+        if "items" in data:
+            for item in data["items"]:
                 info = item.get("volumeInfo", {})
                 if "infoLink" in info:
                     return info["infoLink"]
-    except Exception as e:
+        
+        print("No book links found in API response.")
+    
+    except requests.exceptions.RequestException as e:
         print(f"Error fetching book link: {e}")
 
     return f"https://www.google.com/search?q={book_title.replace(' ', '+')}"
+
+# Test the function when running the script
+if __name__ == "__main__":
+    test_title = "Harry Potter"
+    print(f"Testing with: {test_title}")
+    print(f"Book Link: {get_book_link(test_title)}")
