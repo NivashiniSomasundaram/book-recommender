@@ -1,7 +1,12 @@
 import pickle
 import streamlit as st
 import numpy as np
+import sklearn
 from book_links import get_book_link
+
+print(f"DEBUG: Installed scikit-learn version: {sklearn.__version__}")
+
+
 
 
 st.header("Books Recommender System using Machine Learning")
