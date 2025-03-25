@@ -5,7 +5,7 @@ import os
 API_KEY = os.getenv("GOOGLE_BOOKS_API_KEY")
 
 if API_KEY:
-    print("✅ DEBUG: API Key is set in Render (value hidden for security).")
+    print(f"✅ DEBUG: API Key is set in Render: {API_KEY[:5]}****** (partially hidden)")
 else:
     print("❌ ERROR: API Key is NOT set in Render. Check environment settings.")
 
