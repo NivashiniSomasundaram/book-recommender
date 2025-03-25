@@ -5,9 +5,9 @@ import os
 API_KEY = os.getenv("GOOGLE_BOOKS_API_KEY")
 
 if API_KEY:
-    print("✅ DEBUG: API Key is set in Render (value hidden for security).")
+    print("\U00002705 DEBUG: API Key is set in Render (value hidden for security).")
 else:
-    print("❌ ERROR: API Key is NOT set in Render. Check environment settings.")
+    print("\U0000274C ERROR: API Key is NOT set in Render. Check environment settings.")
 
 def get_book_link(book_title):
     """Fetches a book's link from Google Books API."""
@@ -33,6 +33,7 @@ def get_book_link(book_title):
     
     except requests.exceptions.RequestException as e:
         print(f"Error fetching book link: {e}")
+        return f"API Request Failed: {e}"
 
     return f"https://www.google.com/search?q={book_title.replace(' ', '+')}"
 
